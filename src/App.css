@@ -68,3 +68,7 @@ nav a {
   overflow: none; */
   width: 100vw;
 }
+
+.movie p {
+  display: inline;
+}

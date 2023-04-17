@@ -7,13 +7,11 @@ export default function Home(props) {
     fetch("https://imdb-api.com/en/API/Top250Movies/k_sn8009mj")
     .then((response) => response.json())
     .then((result) => {
-      console.log(result.items)
       setStartScreen(result.items)
     }) 
   }, [])
   
   function test() {
-    console.log(startScreen)
     console.log(props.moviesToWatch)
   }
   
