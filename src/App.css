@@ -1,7 +1,12 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
+body {
+  width: 100vw;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +40,31 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1 {
+  border: 3px solid black;
+  background-color: grey;
+  padding: 10px 30px;
+  margin: 0;
+}
+nav {
+  display: flex;
+  justify-content: flex-start;
+  background-color: black ;
+  height: 30px;
+  text-align: center;
+  align-items: center;
+}
+nav a {
+  padding: 10px;
+  color: grey;
+}
+
+.selection-screen {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  overflow: none; */
+  width: 100vw;
 }
