@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -12,11 +16,6 @@ body {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -78,9 +77,25 @@ nav a {
   outline:none;
   cursor: pointer;
 }
-.on {
+.rating-on {
   color: #000
 }
-.off {
+.rating-off {
   color: #ccc;
+}
+.watched {
+  background-color: green
+}
+.not-watched-yet {
+  background-color: hotpink;
+}
+option {
+  text-align: center;
+}
+.currently-selected {
+  border: 3px solid blue;
+}
+.movie {
+  padding: 30px;
+  margin: 10px;
 }

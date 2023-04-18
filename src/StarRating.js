@@ -10,7 +10,7 @@ export default function StarRating(props) {
         <button
         type="button"
         key={index}
-        className={index <= (hover || rating || props.item.starScore) ? "on": "off"}
+        className={index <= (hover || rating || props.item.starScore) ? "rating-on": "rating-off"}
         onClick={() => {
           return(
             setRating(index)
@@ -30,6 +30,8 @@ export default function StarRating(props) {
     })}
       <button onClick={() => {
         props.item.starScore = rating
+        props.reRender()
+        console.log(props.item.starScore)
       }}>Submit</button>
     </div>
   )

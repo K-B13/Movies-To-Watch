@@ -3,15 +3,16 @@ import StarRating from "./StarRating"
 export default function WatchList(props) {
   const renderMovieList = props.moviesToWatch.map((item, index) => {
     return (
+    <>
     <div 
-    className={`movie ${item.starScore ? "watched": "not-watched-yet"}`} 
+    className={`movie ${item.starScore ? "watched": "not-watched-yet"} ${item.selected ? "currently-selected": "not-selected"}`} 
     
-    key={item.items.id}
+    key={item.id}
     >
       <p>{index + 1}</p>
       &nbsp; 
 
-      <p>{item.items.title}</p>
+      <p>{item.title}</p>
       &nbsp;
 
       <button onClick={() => props.removeSingle(index)}>Remove</button>
@@ -21,19 +22,21 @@ export default function WatchList(props) {
       {item.hasWatched ? null: <button onClick={() => props.revealStars(item,index)}
       >Watched</button>
       }
-      {item.hasWatched && <StarRating item={item} />} 
+      {item.hasWatched && <StarRating item={item} reRender={props.triggerReRender} />} 
       
-      <hr/>
+      
       </div>
+      <hr/>
+      </>
   )
   })
   return (
     <>
       <h2>Watch List</h2>
-      <select>
-        <option>All</option>
-        <option>Movies to watch</option>
-        <option>Rated movies</option>
+      <select onChange={(e)=> props.filterForNotWatched(e)}>
+        <option value={1}>All</option>
+        <option value={2}>Movies to watch</option>
+        <option value={3}>Rated movies</option>
       </select>
       <button onClick={props.removeSelected}>Remove Selected</button>
       <button onClick={props.removeAll}>Remove All</button>

@@ -8,6 +8,7 @@ export default function Home(props) {
     .then((response) => response.json())
     .then((result) => {
       setStartScreen(result.items)
+      console.log(result)
     }) 
   }, [])
   
@@ -22,7 +23,12 @@ export default function Home(props) {
       <div className='selection-screen'>
         { startScreen.length ? 
         startScreen.map((items) => {
-        return <DisplayMovie appendMovie={props.addToList} items={items} key={items.id}/>
+        //  props.moviesToWatch.find((check)=> 
+        // console.log(check.items.id === items.id))? null:
+        return(<DisplayMovie 
+        appendMovie={props.addToList} 
+        items={items} 
+        key={items.id}/>)
       }) : null
     }
       </div>
