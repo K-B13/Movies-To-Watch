@@ -6,7 +6,7 @@ export default function DisplayMovie({ appendMovie, items }) {
         <p>{items.title}</p>
         <p>{items.year}</p>
         <p>{items.imDbRating}</p>
-        <button onClick={() => appendMovie({items, hasWatched: false, removeMovie: false, selected: false})}>Click to add to list</button>
+        <button onClick={() => appendMovie({items, hasWatched: false, removeMovie: false, selected: false, starScore: null})}>Click to add to list</button>
       </div>
     </>
   )

@@ -30,13 +30,27 @@ function App() {
   function selectButton(num) {
     moviesToWatch[num].selected = !moviesToWatch[num].selected
   }
+  function removeAll() {
+    setMoviesToWatch([])
+  }
+  function revealStars(item, index) {
+    moviesToWatch[index].hasWatched = !moviesToWatch[index].hasWatched
+    setMoviesToWatch([...moviesToWatch])
+  }
+
   return (
     <div className="App">
       <h1>Movie's to Watch</h1>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home moviesToWatch={moviesToWatch} addToList={addToList} />}></Route>
-        <Route path="/WatchList" element={<WatchList moviesToWatch={moviesToWatch} removeSingle={removeSingle} selectButton={selectButton} removeSelected={removeSelected} />}></Route>
+        <Route path="/WatchList" element={<WatchList moviesToWatch={moviesToWatch} 
+        removeSingle={removeSingle} 
+        selectButton={selectButton} 
+        removeSelected={removeSelected} 
+        removeAll={removeAll} 
+        revealStars={revealStars}
+        />}></Route>
       </Routes>
       <main></main>
     </div>
