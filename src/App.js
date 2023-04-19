@@ -1,34 +1,52 @@
 import './App.css';
-import { Routes, Route, useParams } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { useState } from 'react'
 import Home from './Home'
 import WatchList from './WatchList'
 import NavBar from './NavBar';
 import MovieCard from './MovieCard';
+import SearchScreen from './SearchScreen';
+import DisplayMovie from './DisplayMovie';
 
 function App() {
+
+  //Value that is within the searchbar in the nav
   const [searchValue, setSearchValue] = useState("")
-  
+
+  // The list that will be rendered in the movie list tab. It is added to by the addToList function which is attached to the button on every MovieCard
   const [ moviesToWatch, setMoviesToWatch] = useState([])
 
+  //Sets what is being typed in the searchbar to the value of the searchbar
   function searchBarValue(boxValue) {
     setSearchValue(boxValue)
-    console.log(searchValue)
   }
-  function submitSearchValue(e) {
-    e.preventDefault()
-    console.log(searchValue)
-    setSearchValue("")
-  }
+  
+  // function submitSearchValue(e) {
+  //   e.preventDefault()
+  //   console.log(searchValue)
+  //   fetch(`https://imdb-api.com/en/API/SearchMovie/k_sn8009mj/${searchValue}`)
+  //   .then((response) => response.json())
+  //   .then((result) => {
+  //   console.log(result.results)
+  //   result.results.map((items) => {
+  //   return(<DisplayMovie 
+  //   items={items} 
+  //   key={items.id}/>)})})
+  //   setSearchValue("")
+  // }
 
+  //function for adding to the movieList
   function addToList(newMovie) {
     setMoviesToWatch([...moviesToWatch, newMovie])
   }
 
+  //This function filters the movieList to remove items with removeMovie as true
   function filterMovieList() {
     const newMoviesList = moviesToWatch.filter((item) => !item.removeMovie)
     setMoviesToWatch(newMoviesList)
   }
+
+  //This function changes the targeted list item's removeMovie to true then runs the function filterMovieList(see above)
   function removeSingle(num) {
     moviesToWatch[num].removeMovie = !moviesToWatch[num].removeMovie
     console.log(moviesToWatch)
@@ -36,24 +54,36 @@ function App() {
     // const newMoviesList = moviesToWatch.filter((item) => !item.removeMovie)
     // setMoviesToWatch(newMoviesList)
   }
+
+  //Function for the button that removes the selected list items. Essentially it just filters the movie that have selected as true then saves the filtered list
   function removeSelected() {
     const removeMovies = moviesToWatch.filter((str) => !str.selected)
     setMoviesToWatch(removeMovies)
   }
+
+  //toggles a list items selected status between true and false then saves the new value down. 
   function selectButton(num) {
     moviesToWatch[num].selected = !moviesToWatch[num].selected
     setMoviesToWatch([...moviesToWatch])
   }
+
+  //removes all items in the moviesToWatch list
   function removeAll() {
     setMoviesToWatch([])
   }
+
+  //function for the watched movie button. It flips the hasWatched from false to true then saves it down triggering a re-render.
   function revealStars(item, index) {
     moviesToWatch[index].hasWatched = !moviesToWatch[index].hasWatched
     setMoviesToWatch([...moviesToWatch])
   }
+
+  //this function just triggers the page to re-render useful to update values on the page. Not sure if this is bad practice to do
   function triggerReRender() {
     setMoviesToWatch([...moviesToWatch])
   }
+
+  //function to filter the movie list. It is linked to the option list on the movielist page. Currently under review.
   function filterForNotWatched(e) {
     console.log(e.target.value)
     const notWatchedMovies = moviesToWatch.filter((str) => !str.starScore)
@@ -65,7 +95,6 @@ function App() {
       <NavBar 
       searchBarValue={searchBarValue}
       searchValue={searchValue}
-      submitSearchValue={submitSearchValue}
       />
       <Routes>
         <Route path="/" element={<Home moviesToWatch={moviesToWatch} addToList={addToList} 
@@ -80,6 +109,12 @@ function App() {
         triggerReRender={triggerReRender}
         filterForNotWatched={filterForNotWatched}
         />}></Route>
+        <Route path="/SearchScreen" element={<SearchScreen 
+        searchBarValue={searchBarValue}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        />}></Route>
+        {/* Code for the dynamic routes */}
         <Route path="/:idCode" element={<MovieCard addToList={addToList} />}></Route>
       </Routes>
       <main></main>

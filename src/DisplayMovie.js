@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 
 
-export default function DisplayMovie({ appendMovie, items }) {
+export default function DisplayMovie({ items }) {
   return (
     <div>
       <div>
+        {/*Link to the dynamic route that is rendered */}
       <Link to={`/${items.id}`}>
-          
           <img src={items.image} alt={items.title} width="100px" />
 
       </Link>
@@ -15,7 +15,7 @@ export default function DisplayMovie({ appendMovie, items }) {
       <div>
         <p>{items.title}</p>
         <p>{items.year}</p>
-        <p>{items.imDbRating}</p>
+        {items.imDbRating ?<p>{items.imDbRating}</p>: null}
         {/* <button onClick={() => {
           appendMovie({items, 
           hasWatched: false, 

@@ -5,11 +5,13 @@ export default function NavBar(props) {
     <nav>
       <Link to="/"> Home </Link>
       <Link to="/WatchList"> Movie Watch List </Link>
-      <Form 
+      <Link to="/SearchScreen">Search</Link>
+      
+      {/* <Form 
       searchBarValue2={props.searchBarValue}
       searchValue2={props.searchValue}
       submitSearchValue2={props.submitSearchValue}
-      />
+      /> */}
     </nav>
   )
 }

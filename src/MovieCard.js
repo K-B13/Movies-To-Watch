@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from 'react'
-import IndividualMovie from "./IndividualMovie"
+
 
 export default function MovieCard(props) {
   const { idCode } = useParams()
@@ -20,10 +20,10 @@ export default function MovieCard(props) {
       {/* <IndividualMovie movieInfo={movieInfo} /> */}
       <h2>{movieInfo.title}</h2>
       <img src={movieInfo.image} alt={`${movieInfo.title} cover photo`} height="200px"/>
-      <p>Director: {movieInfo.directors}</p>
+      {movieInfo.directors ? <p>Director: {movieInfo.directors}</p>: null}
       <p>Stars: {movieInfo.stars}</p>
       <p>Plot: {movieInfo.plot}</p>
-      <p>Release Date: {movieInfo.releaseDate}</p>
+      <p>Release Date: {movieInfo.releaseDate} Content Rating: {movieInfo.contentRating}</p>
       <p>IMDB Rating: {movieInfo.imDbRating}</p>
       <p>Awards: {movieInfo.awards}</p>
       </>
@@ -36,7 +36,7 @@ export default function MovieCard(props) {
           hasWatched: false, 
           removeMovie: false, 
           selected: false, 
-          starScore: null,
+          starScore: 0,
           userDescription: null,})}>
             Add to Movie List
             </button>
