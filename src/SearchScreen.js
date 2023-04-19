@@ -28,7 +28,7 @@ export default function SearchScreen(props) {
       searchValue2={props.searchValue}
       submitSearchValue={submitSearchValue}
       />
-      <div>{
+      <div className='selection-screen'>{
           detMovieInfo.length ? 
           detMovieInfo.map((items) => {
           //  props.moviesToWatch.find((check)=> 

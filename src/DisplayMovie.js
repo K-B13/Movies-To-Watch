@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function DisplayMovie({ items }) {
   return (
-    <div>
+    <div className="each-card">
       <div>
         {/*Link to the dynamic route that is rendered */}
       <Link to={`/${items.id}`}>

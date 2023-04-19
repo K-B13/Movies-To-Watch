@@ -1,39 +1,33 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Home from './Home'
 import WatchList from './WatchList'
 import NavBar from './NavBar';
 import MovieCard from './MovieCard';
 import SearchScreen from './SearchScreen';
-import DisplayMovie from './DisplayMovie';
 
 function App() {
+
+  
+  const [changedPlots, setChangedPlots] = useState([])
+  
+  
 
   //Value that is within the searchbar in the nav
   const [searchValue, setSearchValue] = useState("")
 
   // The list that will be rendered in the movie list tab. It is added to by the addToList function which is attached to the button on every MovieCard
-  const [ moviesToWatch, setMoviesToWatch] = useState([])
+  const [ moviesToWatch, setMoviesToWatch] = useState(JSON.parse(localStorage.getItem('moviesToWatch')))
+
+  useEffect(() => {
+    localStorage.setItem(`moviesToWatch`, JSON.stringify(moviesToWatch))
+  }, [moviesToWatch])
 
   //Sets what is being typed in the searchbar to the value of the searchbar
   function searchBarValue(boxValue) {
     setSearchValue(boxValue)
   }
-  
-  // function submitSearchValue(e) {
-  //   e.preventDefault()
-  //   console.log(searchValue)
-  //   fetch(`https://imdb-api.com/en/API/SearchMovie/k_sn8009mj/${searchValue}`)
-  //   .then((response) => response.json())
-  //   .then((result) => {
-  //   console.log(result.results)
-  //   result.results.map((items) => {
-  //   return(<DisplayMovie 
-  //   items={items} 
-  //   key={items.id}/>)})})
-  //   setSearchValue("")
-  // }
 
   //function for adding to the movieList
   function addToList(newMovie) {
@@ -83,6 +77,11 @@ function App() {
     setMoviesToWatch([...moviesToWatch])
   }
 
+  function handlePlotChanges(movieInfo) {
+    const newPlot = changedPlots.filter((str) => str.id === movieInfo.id)
+    return newPlot.length ? newPlot[0].plot: movieInfo.plot
+  }
+
   //function to filter the movie list. It is linked to the option list on the movielist page. Currently under review.
   function filterForNotWatched(e) {
     console.log(e.target.value)
@@ -100,7 +99,8 @@ function App() {
         <Route path="/" element={<Home moviesToWatch={moviesToWatch} addToList={addToList} 
         />}>
         </Route>
-        <Route path="/WatchList" element={<WatchList moviesToWatch={moviesToWatch} 
+        <Route path="/WatchList" element={<WatchList 
+        moviesToWatch={moviesToWatch} 
         removeSingle={removeSingle} 
         selectButton={selectButton} 
         removeSelected={removeSelected} 
@@ -108,14 +108,20 @@ function App() {
         revealStars={revealStars}
         triggerReRender={triggerReRender}
         filterForNotWatched={filterForNotWatched}
+        changedPlots={changedPlots}
         />}></Route>
         <Route path="/SearchScreen" element={<SearchScreen 
         searchBarValue={searchBarValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        handlePlotChanges={handlePlotChanges}
         />}></Route>
         {/* Code for the dynamic routes */}
-        <Route path="/:idCode" element={<MovieCard addToList={addToList} />}></Route>
+        <Route path="/:idCode" element={<MovieCard 
+        addToList={addToList}
+        changedPlots={changedPlots}
+        handlePlotChanges={handlePlotChanges}
+        />}></Route>
       </Routes>
       <main></main>
     </div>
