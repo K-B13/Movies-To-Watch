@@ -22,7 +22,7 @@ export default function MovieCard(props) {
     const movieAlreadyInList = movieList.some((movie) => movie.id === result.id)
     setIsInList(movieAlreadyInList)
     }
-    
+
     }) 
 
   }, [])
@@ -43,8 +43,6 @@ export default function MovieCard(props) {
       {isInList ? 
         <PlotEdit 
         movieInfo={movieInfo}
-        editedPlots={props.changedPlots}
-        handlePlotChanges2={props.handlePlotChanges}
         />: 
         <p>{movieInfo.plot}</p>}
 

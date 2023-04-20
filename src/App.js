@@ -11,12 +11,6 @@ function App() {
   //Value that is within the searchbar in the nav
   const [searchValue, setSearchValue] = useState("")
 
-  // The list that will be rendered in the movie list tab. It is added to by the addToList function which is attached to the button on every MovieCard
-  // const initialState = 
-  
-    
-
-
   const [ moviesToWatch, setMoviesToWatch] = useState(!localStorage.getItem('moviesToWatch') ?
   localStorage.setItem(`moviesToWatch`, JSON.stringify([])):
   JSON.parse(localStorage.getItem('moviesToWatch')))
@@ -54,8 +48,6 @@ function App() {
     moviesToWatch[num].removeMovie = !moviesToWatch[num].removeMovie
     console.log(moviesToWatch)
     filterMovieList()
-    // const newMoviesList = moviesToWatch.filter((item) => !item.removeMovie)
-    // setMoviesToWatch(newMoviesList)
   }
 
   //Function for the button that removes the selected list items. Essentially it just filters the movie that have selected as true then saves the filtered list
@@ -86,13 +78,6 @@ function App() {
     setMoviesToWatch([...moviesToWatch])
   }
 
-
-  //function to filter the movie list. It is linked to the option list on the movielist page. Currently under review.
-  function filterForNotWatched(e) {
-    console.log(e.target.value)
-    const notWatchedMovies = moviesToWatch.filter((str) => !str.starScore)
-    setMoviesToWatch(notWatchedMovies)
-  }
   return (
     <div className="App">
       <header>
@@ -118,7 +103,6 @@ function App() {
         removeAll={removeAll} 
         revealStars={revealStars}
         triggerReRender={triggerReRender}
-        filterForNotWatched={filterForNotWatched}
         />}></Route>
         <Route path="/SearchScreen" element={<SearchScreen 
         searchBarValue={searchBarValue}

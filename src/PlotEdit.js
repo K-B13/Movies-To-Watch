@@ -2,10 +2,7 @@ import AutosizeInput from 'react-input-autosize'
 import { useState, useEffect } from 'react'
 export default function PlotEdit(props) {
   const [inputValue, setInputValue] = useState(
-    // const test = props.editedPlots.filter((str) => str.id === props.movieInfo.id) ?
-    // test[0].id:
     ""
-    // props.handlePlotChanges2(props.movieInfo)
   )
   useEffect(() =>{
     const hasLocalStorage = localStorage.getItem('moviesToWatch')
@@ -17,13 +14,6 @@ export default function PlotEdit(props) {
     else setInputValue(props.movieInfo.plot)
   },[])
   
-  /*`${props.editedPlots.filter((str) => str.id === props.movieInfo.id)}`*/ 
-  
-    // useEffect(() => {
-    //   props.editedPlots.filter((str) => 
-    //     str.id === props.movieInfo.id
-    //   )}, [])/* ? setInputValue(`${props.editedPlots[0].plot}`): setInputValue(`${props.movieInfo.plot}`)
-    // }, [])
   function changePlot(e, plotText) {
     e.preventDefault()
     const movieList = JSON.parse(localStorage.getItem('moviesToWatch'))
