@@ -6,6 +6,7 @@ import WatchList from './WatchList'
 import NavBar from './NavBar';
 import MovieCard from './MovieCard';
 import SearchScreen from './SearchScreen';
+import Misc from './Misc';
 
 function App() {
   //Value that is within the searchbar in the nav
@@ -108,6 +109,9 @@ function App() {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         />}></Route>
+        <Route path="/Misc" element={<Misc />}>
+          
+        </Route>
         {/* Code for the dynamic routes */}
         <Route path="/:idCode" element={<MovieCard 
         addToList={addToList}

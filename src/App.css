@@ -267,6 +267,20 @@ input::placeholder{
   background-color: crimson;
   border-radius: 30px;
 }
+.misc-buttons {
+  background-color: crimson;
+  border-radius: 30px;
+  padding: 8px;
+}
+.misc-buttons button{
+  color: crimson;
+  background-color: white;
+}
+.misc-buttons button:hover{
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 
 @media only screen and (max-width: 600px){
   .selection-screen {
