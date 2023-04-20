@@ -32,7 +32,7 @@ export default function MovieCard(props) {
       {movieInfo ?
       <>
       {/* <IndividualMovie movieInfo={movieInfo} /> */}
-      <h2>{movieInfo.title}</h2>
+      <h2 className="movie-card-heading">{movieInfo.title}</h2>
       <img src={movieInfo.image} alt={`${movieInfo.title} cover photo`} height="200px"/>
       <div className="movie-card-info">
       {movieInfo.directors ? 
@@ -43,6 +43,7 @@ export default function MovieCard(props) {
       {isInList ? 
         <PlotEdit 
         movieInfo={movieInfo}
+        reRender={props.triggerReRender}
         />: 
         <p>{movieInfo.plot}</p>}
 
@@ -62,6 +63,9 @@ export default function MovieCard(props) {
           image: movieInfo.image, 
           rating: movieInfo.imDbRating,
           plot: movieInfo.plot,
+          genres: movieInfo.genres,
+          year: movieInfo.year,
+          contentRating: movieInfo.contentRating,
           hasWatched: false, 
           removeMovie: false, 
           selected: false, 

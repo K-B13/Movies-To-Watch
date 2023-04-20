@@ -18,14 +18,12 @@ export default function PlotEdit(props) {
     e.preventDefault()
     const movieList = JSON.parse(localStorage.getItem('moviesToWatch'))
     const updatedMovieList = movieList.map((movie) =>  {
-      if(movie.id === props.movieInfo.id) movie.userDescription = plotText
+      if(movie.id === props.movieInfo.id) {movie.userDescription = plotText}
       return movie 
     })
     
     localStorage.setItem(`moviesToWatch`, JSON.stringify(updatedMovieList))
-    
     setInputValue(plotText)
-    
   }
   
   return(

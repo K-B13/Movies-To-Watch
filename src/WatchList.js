@@ -31,12 +31,16 @@ export default function WatchList(props) {
     className={`movie ${item.starScore ? "watched": "not-watched-yet"} ${item.selected ? "currently-selected": "not-selected"}`} 
     >
       <div className="movie-cards">
-      <p className="list-image"><img src={item.image} height="150px" width="130px"></img></p>
+      <p className="list-image"><img src={item.image} height="180px" width="160px"></img></p>
       &nbsp; 
       <div className="list-info">
       <Link to={`/${item.id}`}>
         <p >{item.title}</p>
         </Link>
+        <p>Year: {item.year}</p>
+        <p>IMDB rating: {item.rating}</p>
+        <p>Content Rating: {item.contentRating}</p>
+        <p>Genres: {item.genres}</p>
       </div>
       
       
@@ -57,16 +61,14 @@ export default function WatchList(props) {
       </div>
       </div>
       {item.hasWatched && <StarRating item={item} reRender={props.triggerReRender} />} 
-      {item.starScore ? 
-      <button 
+      {item.starScore !== 0 && <button 
       onClick={() => {
-        item.revealPlot= !item.revealPlot
+        item.revealPlot = !item.revealPlot
         props.triggerReRender()
         }}
       >
-        Click
-      </button>
-      : null}
+        {!item.revealPlot ? "Reveal": "Reset"}
+      </button>}
       <br />
       {item.revealPlot && item.starScore !== 0 && <PlotEdit 
       movieInfo={item} 

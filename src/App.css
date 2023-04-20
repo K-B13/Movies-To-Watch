@@ -86,8 +86,8 @@ header {
 }
 .selection-screen {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 25px;
   width: 90vw;
   margin: 0 auto;
 }
@@ -101,6 +101,7 @@ header {
   outline:none;
   cursor: pointer;
 }
+
 .rating-on {
   color: gold
 }
@@ -163,15 +164,25 @@ select:hover {
 .card-info{
   padding: 5px;
   margin: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
+.card-info p {
+  margin: 4px;
+}
+
 .list-buttons{
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-right: 0;
   padding: 5px 0;
+  width: 200px;
 }
 .list-buttons button {
   margin: 5px;
+  width: 80px;
 }
 .watchList-button {
   color:crimson;
@@ -181,6 +192,7 @@ select:hover {
 .movie-cards{
   display: flex;
   justify-content: space-between;
+  
 }
 input { 
   color: crimson;
@@ -210,6 +222,11 @@ input::placeholder{
 .list-info {
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
+}
+
+.list-info p {
+  margin: 8px;
 }
 
 .close-single-button{
@@ -246,10 +263,15 @@ input::placeholder{
   background-color: white;
 }
 
+.movie-card-heading {
+  background-color: crimson;
+  border-radius: 30px;
+}
+
 @media only screen and (max-width: 600px){
   .selection-screen {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 5px;
     width: 90vw;
   }

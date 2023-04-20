@@ -10,7 +10,6 @@ import SearchScreen from './SearchScreen';
 function App() {
   //Value that is within the searchbar in the nav
   const [searchValue, setSearchValue] = useState("")
-
   const [ moviesToWatch, setMoviesToWatch] = useState(!localStorage.getItem('moviesToWatch') ?
   localStorage.setItem(`moviesToWatch`, JSON.stringify([])):
   JSON.parse(localStorage.getItem('moviesToWatch')))
@@ -112,6 +111,7 @@ function App() {
         {/* Code for the dynamic routes */}
         <Route path="/:idCode" element={<MovieCard 
         addToList={addToList}
+        triggerReRender={triggerReRender}
         />}></Route>
       </Routes>
       <main></main>
