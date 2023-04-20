@@ -18,9 +18,11 @@ export default function WatchList(props) {
     }
   }
 
-  useEffect(() =>
-    setFilteredList([...props.moviesToWatch])
+  useEffect(() => {
+    const moviesToSpread = props.moviesToWatch ? props.moviesToWatch: ""
+    setFilteredList([...moviesToSpread])}
   ,[props.moviesToWatch])
+
 
   const renderMovieList = filteredList.map((item, index) => {
     return (

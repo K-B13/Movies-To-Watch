@@ -12,15 +12,25 @@ function App() {
   const [searchValue, setSearchValue] = useState("")
 
   // The list that will be rendered in the movie list tab. It is added to by the addToList function which is attached to the button on every MovieCard
-  const initialState = JSON.parse(localStorage.getItem('moviesToWatch')) === null ? 
-  localStorage.setItem(`moviesToWatch`, JSON.stringify([])):
-  JSON.parse(localStorage.getItem('moviesToWatch'))
-  const [ moviesToWatch, setMoviesToWatch] = useState(initialState)
+  // const initialState = 
+  
+    
 
+
+  const [ moviesToWatch, setMoviesToWatch] = useState(!localStorage.getItem('moviesToWatch') ?
+  localStorage.setItem(`moviesToWatch`, JSON.stringify([])):
+  JSON.parse(localStorage.getItem('moviesToWatch')))
+
+  
 
   useEffect(() => {
-    localStorage.setItem(`moviesToWatch`, JSON.stringify(moviesToWatch))
+    if (moviesToWatch) localStorage.setItem(`moviesToWatch`, JSON.stringify(moviesToWatch))
   }, [moviesToWatch])
+
+  useEffect(() => {
+    const hasLocalStorage = localStorage.getItem('moviesToWatch')
+    if(!hasLocalStorage) localStorage.setItem(`moviesToWatch`, JSON.stringify([]))
+  }, [])
 
   //Sets what is being typed in the searchbar to the value of the searchbar
   function searchBarValue(boxValue) {
@@ -29,7 +39,8 @@ function App() {
 
   //function for adding to the movieList
   function addToList(newMovie) {
-    setMoviesToWatch([...moviesToWatch, newMovie])
+    const moviesToSpread = moviesToWatch ? moviesToWatch: ""
+    setMoviesToWatch([...moviesToSpread, newMovie])
   }
 
   //This function filters the movieList to remove items with removeMovie as true

@@ -16,10 +16,13 @@ export default function MovieCard(props) {
     .then((result) => {
     setMovieInfo(result)
 
+    const hasLocalStorage = localStorage.getItem('moviesToWatch')
+    if (hasLocalStorage){
     const movieList = JSON.parse(localStorage.getItem('moviesToWatch'))
-
     const movieAlreadyInList = movieList.some((movie) => movie.id === result.id)
     setIsInList(movieAlreadyInList)
+    }
+    
     }) 
 
   }, [])
