@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Movies-To-Watch/static/css/main.1996fc04.css",
-    "main.js": "/Movies-To-Watch/static/js/main.5dda9208.js",
+    "main.js": "/Movies-To-Watch/static/js/main.685522e7.js",
     "static/js/787.f5224f49.chunk.js": "/Movies-To-Watch/static/js/787.f5224f49.chunk.js",
     "index.html": "/Movies-To-Watch/index.html",
     "main.1996fc04.css.map": "/Movies-To-Watch/static/css/main.1996fc04.css.map",
-    "main.5dda9208.js.map": "/Movies-To-Watch/static/js/main.5dda9208.js.map",
+    "main.685522e7.js.map": "/Movies-To-Watch/static/js/main.685522e7.js.map",
     "787.f5224f49.chunk.js.map": "/Movies-To-Watch/static/js/787.f5224f49.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1996fc04.css",
-    "static/js/main.5dda9208.js"
+    "static/js/main.685522e7.js"
   ]
 }
