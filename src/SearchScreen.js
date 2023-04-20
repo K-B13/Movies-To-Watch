@@ -22,7 +22,7 @@ export default function SearchScreen(props) {
     props.setSearchValue("")
   }
   return(
-    <>
+    <div className="search-body">
       <Form 
       searchBarValue2={props.searchBarValue}
       searchValue2={props.searchValue}
@@ -39,6 +39,6 @@ export default function SearchScreen(props) {
         }) : null
       }
         </div>
-    </>
+    </div>
   )
 }

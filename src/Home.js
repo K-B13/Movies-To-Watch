@@ -19,7 +19,7 @@ export default function Home(props) {
   }
   
   return (
-    <>
+    <div className="home-body">
     {/* The test button */}
       <button onClick={test}>Click</button>
     {/* Maps through the array saved in startScreen if there is something in it else it does nothing */}
@@ -35,7 +35,7 @@ export default function Home(props) {
       }) : null
     }
       </div>
-    </>
+    </div>
   
 ) 
 }

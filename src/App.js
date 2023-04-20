@@ -8,17 +8,14 @@ import MovieCard from './MovieCard';
 import SearchScreen from './SearchScreen';
 
 function App() {
-
-  
-  const [changedPlots, setChangedPlots] = useState([])
-  
-  
-
   //Value that is within the searchbar in the nav
   const [searchValue, setSearchValue] = useState("")
 
   // The list that will be rendered in the movie list tab. It is added to by the addToList function which is attached to the button on every MovieCard
-  const [ moviesToWatch, setMoviesToWatch] = useState(JSON.parse(localStorage.getItem('moviesToWatch')))
+  const initialState = JSON.parse(localStorage.getItem('moviesToWatch')) === null ? 
+  localStorage.setItem(`moviesToWatch`, JSON.stringify([])):
+  JSON.parse(localStorage.getItem('moviesToWatch'))
+  const [ moviesToWatch, setMoviesToWatch] = useState(initialState)
 
 
   useEffect(() => {
@@ -78,10 +75,6 @@ function App() {
     setMoviesToWatch([...moviesToWatch])
   }
 
-  function handlePlotChanges(movieInfo) {
-    const newPlot = changedPlots.filter((str) => str.id === movieInfo.id)
-    return newPlot.length ? newPlot[0].plot: movieInfo.plot
-  }
 
   //function to filter the movie list. It is linked to the option list on the movielist page. Currently under review.
   function filterForNotWatched(e) {
@@ -91,11 +84,17 @@ function App() {
   }
   return (
     <div className="App">
-      <h1>Movie's to Watch</h1>
-      <NavBar 
-      searchBarValue={searchBarValue}
-      searchValue={searchValue}
-      />
+      <header>
+        <aside className="top-left"></aside>
+        <div>
+          <h1>Movies to Watch</h1>
+          <NavBar 
+          searchBarValue={searchBarValue}
+          searchValue={searchValue}
+          />
+        </div>
+        <aside className="top-right"></aside>
+      </header>
       <Routes>
         <Route path="/" element={<Home moviesToWatch={moviesToWatch} addToList={addToList} 
         />}>
@@ -109,19 +108,15 @@ function App() {
         revealStars={revealStars}
         triggerReRender={triggerReRender}
         filterForNotWatched={filterForNotWatched}
-        changedPlots={changedPlots}
         />}></Route>
         <Route path="/SearchScreen" element={<SearchScreen 
         searchBarValue={searchBarValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        handlePlotChanges={handlePlotChanges}
         />}></Route>
         {/* Code for the dynamic routes */}
         <Route path="/:idCode" element={<MovieCard 
         addToList={addToList}
-        changedPlots={changedPlots}
-        handlePlotChanges={handlePlotChanges}
         />}></Route>
       </Routes>
       <main></main>

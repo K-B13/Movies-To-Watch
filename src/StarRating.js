@@ -27,7 +27,9 @@ export default function StarRating(props) {
         </button>
       );
     })}
-      <button onClick={() => {
+      <button 
+      className="submit-stars"
+      onClick={() => {
         props.item.starScore = rating
         props.reRender()
         console.log(props.item)

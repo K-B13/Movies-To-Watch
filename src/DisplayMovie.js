@@ -12,7 +12,7 @@ export default function DisplayMovie({ items }) {
       </Link>
 
       </div>
-      <div>
+      <div className="card-info">
         <p>{items.title}</p>
         <p>{items.year}</p>
         {items.imDbRating ?<p>{items.imDbRating}</p>: null}
