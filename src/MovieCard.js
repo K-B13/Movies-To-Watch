@@ -15,7 +15,7 @@ export default function MovieCard(props) {
     console.log(movieInfo)
     const movieAlreadyInList = movieList.some((movie) => movie.id === result.id)
     setIsInList(movieAlreadyInList)
-    }) 
+    }).catch(() => console.log("caught problem in moviecard use effect"))
 
   }, [])
 

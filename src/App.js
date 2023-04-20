@@ -20,6 +20,7 @@ function App() {
   // The list that will be rendered in the movie list tab. It is added to by the addToList function which is attached to the button on every MovieCard
   const [ moviesToWatch, setMoviesToWatch] = useState(JSON.parse(localStorage.getItem('moviesToWatch')))
 
+
   useEffect(() => {
     localStorage.setItem(`moviesToWatch`, JSON.stringify(moviesToWatch))
   }, [moviesToWatch])
