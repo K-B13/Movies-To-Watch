@@ -19,12 +19,6 @@ export default function Misc() {
       .then((result) => setStore(result.value))
       }
       >Chuck Norris</button>
-    <button onClick={() =>
-      fetch("https://api.kanye.rest")
-      .then((response) => response.json())
-      .then((result) => setStore(result.quote))
-      }
-      >Quotes</button>
       {store ? <p>{store}</p>: null}
     </div>
     
