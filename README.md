@@ -60,14 +60,14 @@ Your React app must be deployed to GitHub pages, Surge, or any hosting service. 
 
 ### Bonus Requirements
 You should only attempt these bonuses if and only if you’ve satisfied the base technical requirements for this project.
-Incorporate another API in your application
-Use React.Context to pass props down to your children
-Make the app Responsive
-Save the data to local storage or an API
-Use 1 or more 3rd party libraries
-Use a React component library like Any Design, Bootstrap React, or Material UI
-Use a CSS library like Bootstrap
-Add User Sign Up, Sign In, and Sign Out with Firebase and React Authentication.
+* Incorporate another API in your application
+* Use React.Context to pass props down to your children
+* Make the app Responsive
+* Save the data to local storage or an API
+* Use 1 or more 3rd party libraries
+* Use a React component library like Any Design, Bootstrap React, or Material UI
+* Use a CSS library like Bootstrap
+* Add User Sign Up, Sign In, and Sign Out with Firebase and React Authentication.
 
 ## Planning
 
@@ -76,6 +76,8 @@ I began the planning phase by searching for an API to use. I wanted to make sure
 Once I had decided that I wanted to use the IMDb-API, due to having extensive information available and ease of use, I set about planning my app.
 
 I drew up a draft design of what I wanted my app to look like in Figma. I planned out the homepage and the list page.
+
+![Figma Plan](plan.png)
 
 I also thought through the features I wanted my app to have. I also had a think about how I might go about achieving the desired result. I focused on the MVP criteria at this phase as that was the priority but when the app had achieved the MVP stage I would then think about additional features I would want to add.
 
