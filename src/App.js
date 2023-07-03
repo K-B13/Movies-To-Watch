@@ -11,16 +11,21 @@ import Misc from './Misc';
 function App() {
   //Value that is within the searchbar in the nav
   const [searchValue, setSearchValue] = useState("")
+
+  //state that controls what is show in the list, this will also be saved to local and will be used to check if items are already on the list. in the usestate the ternary checks if the local storage has anything if it doesnt it adds an empty array toherwise it just grabs what is in there.
   const [ moviesToWatch, setMoviesToWatch] = useState(!localStorage.getItem('moviesToWatch') ?
   localStorage.setItem(`moviesToWatch`, JSON.stringify([])):
   JSON.parse(localStorage.getItem('moviesToWatch')))
 
   
-
+// whenever moviesToWatch changes it is updated in the svae file.
   useEffect(() => {
     if (moviesToWatch) localStorage.setItem(`moviesToWatch`, JSON.stringify(moviesToWatch))
   }, [moviesToWatch])
 
+
+  //on load checks if movie to watch has anything if it doesn't it adds an empty array
+  // this may be redundant due to changes in the useState which now do the same thing.
   useEffect(() => {
     const hasLocalStorage = localStorage.getItem('moviesToWatch')
     if(!hasLocalStorage) localStorage.setItem(`moviesToWatch`, JSON.stringify([]))
@@ -83,6 +88,7 @@ function App() {
       <header>
         <aside className="top-left"></aside>
         <div>
+          {/* Headline across all routes  */}
           <h1>Movies to Watch</h1>
           <NavBar 
           searchBarValue={searchBarValue}
@@ -110,7 +116,7 @@ function App() {
         setSearchValue={setSearchValue}
         />}></Route>
         <Route path="/Misc" element={<Misc />}>
-          
+
         </Route>
         {/* Code for the dynamic routes */}
         <Route path="/:idCode" element={<MovieCard 

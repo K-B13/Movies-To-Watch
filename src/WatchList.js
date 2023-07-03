@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom'
 import CloseIcon from './icons8-xbox-x-32.png'
 
 export default function WatchList(props) {
-  const [ revealPlot, setrevealPlot ] = useState(false)
-
+  // used to filter through the moviesToWatch list and only show the movies that match the search criteria.
   const [filteredList, setFilteredList] = useState([])
   function filterTheList(e) {
     if(e.target.value === "1"){
@@ -17,13 +16,13 @@ export default function WatchList(props) {
       setFilteredList(props.moviesToWatch.filter((str) => str.starScore !== 0))
     }
   }
-
+  // on load checks to see if the moviesToWatch is empty if it isn't then setFilteredList to the contents of moviesToWatch else set it to an empty string filteredList will be what is used to render the page.
   useEffect(() => {
     const moviesToSpread = props.moviesToWatch ? props.moviesToWatch: ""
     setFilteredList([...moviesToSpread])}
   ,[props.moviesToWatch])
 
-
+  //maps over the filtered list and for each one displays information from each array item: title, image, genres, content rating and imdb rating. Also reveals some buttons on the side that can remove select and set a movie as watched.
   const renderMovieList = filteredList.map((item, index) => {
     return (
     <div key={item.id}>
@@ -31,53 +30,69 @@ export default function WatchList(props) {
     className={`movie ${item.starScore ? "watched": "not-watched-yet"} ${item.selected ? "currently-selected": "not-selected"}`} 
     >
       <div className="movie-cards">
-      <p className="list-image"><img src={item.image} height="180px" width="160px"></img></p>
-      &nbsp; 
-      <div className="list-info">
-      <Link to={`/${item.id}`}>
-        <p >{item.title}</p>
-        </Link>
-        <p>Year: {item.year}</p>
-        <p>IMDB rating: {item.rating}</p>
-        <p>Content Rating: {item.contentRating}</p>
-        <p>Genres: {item.genres}</p>
-      </div>
+
+        <p className="list-image"><img src={item.image} height="180px" width="160px"></img></p>
+
+        &nbsp; 
+
+        <div className="list-info">
+        {/* Makes the title a link to the dynamic route.*/}
+          <Link to={`/${item.id}`}>
+            <p >{item.title}</p>
+          </Link>
+
+          <p>Year: {item.year}</p>
+          <p>IMDB rating: {item.rating}</p>
+          <p>Content Rating: {item.contentRating}</p>
+          <p>Genres: {item.genres}</p>
+        </div>
       
-      
-      &nbsp;
-      <div className="list-buttons">
-        <button 
-        className="close-single-button"
-        onClick={() => props.removeSingle(index)}>
-          <img src={CloseIcon} alt="an Icon" />
+        &nbsp;
+
+        <div className="list-buttons">
+          {/*The button which when clicked triggers the function remove single which is in the app.js file. The index of the movie item is passed as a parameter so remove single can locate the movie in the moviesToWatch array. */}
+          <button 
+          className="close-single-button"
+          onClick={() => props.removeSingle(index)}>
+            <img src={CloseIcon} alt="an Icon" />
           </button>
 
-        <button onClick={() => props.selectButton(index)}>Select</button>
+          {/*Passes the movie index into a function called select button which is in app.js. This function locates the movie in moviesToWatch and toggles the key selected of the movie in question. */}
+          <button onClick={() => props.selectButton(index)}>Select</button>
 
-      <button onClick={() => props.revealStars(item,index)}
-      >Watched</button>
+          {/*This button triggers a function in app.js that will change the seleceted movies key called hasWatched from either false to true or viceversa. */}
+          <button onClick={() => props.revealStars(item,index)}
+          >Watched</button>
       
       
+        </div>
+
       </div>
-      </div>
+      {/*if the movie's hasWatched is true then the starRating component is show and passed some information about the movie. */}
       {item.hasWatched && <StarRating item={item} reRender={props.triggerReRender} />} 
+      {/*if the movie has a star score then the button to view the plot to edit it will be revealed. */}
       {item.starScore !== 0 && <button 
       onClick={() => {
         item.revealPlot = !item.revealPlot
         props.triggerReRender()
         }}
       >
+
         {!item.revealPlot ? "Reveal": "Reset"}
       </button>}
+
       <br />
+      {/*if reveal plot has been turned to true and there is a star score then the component plotEdit will shown and will be passed the movies information. */}
       {item.revealPlot && item.starScore !== 0 && <PlotEdit 
       movieInfo={item} 
       />}
-      </div>
+
+        </div>
       <hr/>
-      </div>
+    </div>
   )
   })
+
   return (
     <div className="list-background">
       <h2>Watch List</h2>

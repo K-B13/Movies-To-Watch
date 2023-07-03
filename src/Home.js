@@ -22,12 +22,10 @@ export default function Home(props) {
     <div className="home-body">
     {/* The test button */}
       <button onClick={test}>Click</button>
-    {/* Maps through the array saved in startScreen if there is something in it else it does nothing */}
+    {/* Maps through the array saved in startScreen if there is something in it else it does nothing. If there is something in it the map creates a DisplayMovie component and feeds it the information for the movie the map is on in the array. */}
       <div className='selection-screen'>
         { startScreen.length ? 
         startScreen.map((items) => {
-        //  props.moviesToWatch.find((check)=> 
-        // console.log(check.items.id === items.id))? null:
         return(<DisplayMovie 
         appendMovie={props.addToList} 
         items={items} 
