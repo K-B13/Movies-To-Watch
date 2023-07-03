@@ -100,20 +100,116 @@ Select ratings after the user has selected watched.
 ## Build/Code Process
 I began the code process setting up the react app and the routes to the homepage and the Watchlist page. I also set up a state to store the movie list.
 
+```js
+  <h1>Movie's to Watchlist</h1>
+  <NavBar />
+  <Routes>
+    <Route path="/" element={<Home moviesToWatch={moviesToWatch} addToList={addToList} 
+    />}>
+    <Route path="/WatchList" element={<WatchList 
+     moviesToWatch={moviesToWatch} 
+    />}></Route>
+  </Routes>
+  <main></main>
+```
+
 Once I had the initial setup complete I went about setting up a fetch request for the home page and rendering the information onto the page by mapping through the information received from the fetch request.
+
+```js
+  <div className='selection-screen'>
+    { startScreen.length ? 
+    startScreen.map((items) => {
+      return(<DisplayMovie 
+      appendMovie={props.addToList} 
+      items={items} 
+      key={items.id}/>)
+      }) : null
+    }
+  </div>
+```
 
 The logic for removing single items, selecting items and removing selected items are shown above. I added 2 keys to any movie object added to the movie list state. One key was called removeMovie, which is a boolean, and if an item was changed to true the list state would be filtered so it removed the movie set to true. The other was a select key which could be toggled and when the remove selected is clicked would remove all items from the list whose selected key was true. This would allow multiple selected items to be removed at once.
 
+```js
+function removeSingle(num) {
+    moviesToWatch[num].removeMovie = !moviesToWatch[num].removeMovie
+    console.log(moviesToWatch)
+    filterMovieList()
+  }
+
+  function removeSelected() {
+    const removeMovies = moviesToWatch.filter((str) => !str.selected)
+    setMoviesToWatch(removeMovies)
+  }
+
+  function selectButton(num) {
+    moviesToWatch[num].selected = !moviesToWatch[num].selected
+    setMoviesToWatch([...moviesToWatch])
+  }
+```
+
 I realised I wanted the user to have a way to rate the movies that they had watched. Also I wanted this feature to be the traditional star system that is common with movie rating systems.
+
+```js
+{[...Array(5)].map((star, index) => {
+      index +=1
+      return (
+        <button
+        type="button"
+        key={index}
+        className={index <= (hover || rating ) ? "rating-on": "rating-off"}
+        onClick={() => {
+          return(
+            setRating(index)
+          )
+        }
+        }
+        onMouseEnter={() => setHover(index)}
+        onMouseLeave={() => setHover(rating)}
+        onDoubleClick={() => {
+          setRating(0);
+        }}
+        >
+        <span className='star'> &#9733;</span>
+        </button>
+      );
+    })}
+```
 
 Above is the setup for the star rating system. FIrst an array of numbers 1-5 is created. If the index of the stars is less than the hover, rating or already input starScore then the stars className will be set to ‘on’ (this class name will colour the stars in yellow) and if the index is greater than the rating, hover or starScore then it will not be filled in. I was pleased with how this feature turned out as it looks really good and functionally it works as intended.
 
 I added in an individual movie screen page which would display more information to the user. I used dynamic routing to achieve this through the use of the useParams hook. When the user clicks on one of the movies, that movie's ID would be added on the URL and then it would be fetched from there by the useParams hook. The movie id was then used in the fetch request to gain the additional information as the fetch request for the top 250 on the homepage had limited data and I needed to do another search to gain more for the individual page display.
 
+```js
+  const { idCode } = useParams()
+  const [ movieInfo, setMovieInfo ] = useState([])
+  const [ isInList, setIsInList ] = useState(false)
+  useEffect(() => {
+    fetch(`https://imdb-api.com/en/API/Title/k_sn8009mj/${idCode}`)
+    .then((response) => response.json())
+    .then((result) => {
+    setMovieInfo(result)})
+}) 
+```
+
 The app was working well but users could only add movies that were in the top 250 movies on IMDb which is very limited. So I wanted to add a search feature so that users could search for other movies. I had some difficulty setting up the search feature in the nav bar and with limited time for the project I opted to have the search bar on its own page which differed from the original design. 
 Also I added in local storage to the app as I realised what good would a list be if it reset every time the user came back to it. This was quite straightforward as the only information that needed to be saved was the movie list state. I used a useEffect that would save the list to local storage whenever it changed.
 
 After the search bar was complete, I worked on the final MVP feature I needed to add, which was the edit feature. I enabled the user to edit the plot after they had added the movie to their list. The plot on the movie page would be solid text if the movie isn’t on their list, but, if they click to add it to their list then the plot would change to an input box.
+
+```js
+function changePlot(e, plotText) {
+    e.preventDefault()
+    const movieList = JSON.parse(localStorage.getItem('moviesToWatch'))
+    const updatedMovieList = movieList.map((movie) =>  {
+      if(movie.id === props.movieInfo.id) {movie.userDescription = plotText}
+      return movie 
+    })
+    
+    localStorage.setItem(`moviesToWatch`, JSON.stringify(updatedMovieList))
+    setInputValue(plotText)
+  }
+```
 
 ## Challenges
 
