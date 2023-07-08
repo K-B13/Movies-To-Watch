@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Movies-To-Watch/static/css/main.14b599dc.css",
-    "main.js": "/Movies-To-Watch/static/js/main.02c2f77a.js",
+    "main.css": "/Movies-To-Watch/static/css/main.9fe48fb6.css",
+    "main.js": "/Movies-To-Watch/static/js/main.00c21a8d.js",
     "static/js/787.f5224f49.chunk.js": "/Movies-To-Watch/static/js/787.f5224f49.chunk.js",
     "static/media/Cinema.png": "/Movies-To-Watch/static/media/Cinema.9b731c9418461067f357.png",
     "static/media/film.png": "/Movies-To-Watch/static/media/film.e0c7f5db02c6e94ca92c.png",
     "index.html": "/Movies-To-Watch/index.html",
-    "main.14b599dc.css.map": "/Movies-To-Watch/static/css/main.14b599dc.css.map",
-    "main.02c2f77a.js.map": "/Movies-To-Watch/static/js/main.02c2f77a.js.map",
+    "main.9fe48fb6.css.map": "/Movies-To-Watch/static/css/main.9fe48fb6.css.map",
+    "main.00c21a8d.js.map": "/Movies-To-Watch/static/js/main.00c21a8d.js.map",
     "787.f5224f49.chunk.js.map": "/Movies-To-Watch/static/js/787.f5224f49.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.14b599dc.css",
-    "static/js/main.02c2f77a.js"
+    "static/css/main.9fe48fb6.css",
+    "static/js/main.00c21a8d.js"
   ]
 }
