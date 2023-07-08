@@ -40,7 +40,6 @@ export default function StarRating(props) {
       onClick={() => {
         props.item.starScore = rating
         props.reRender()
-        console.log(props.item)
       }}>Submit</button>
     </div>
   )

@@ -9,9 +9,9 @@ export default function PlotEdit(props) {
     if (hasLocalStorage){
     const movieList = JSON.parse(localStorage.getItem('moviesToWatch'))
     const movieHasUserPlot = movieList.filter((movie) => movie.userDescription && (movie.id === props.movieInfo.id))
-    setInputValue(movieHasUserPlot.length ? movieHasUserPlot[0].userDescription: props.movieInfo.plot)
+    setInputValue(movieHasUserPlot.length ? movieHasUserPlot[0].userDescription: props.movieInfo.plot.plotText.plainText)
     }
-    else setInputValue(props.movieInfo.plot)
+    else setInputValue(props.movieInfo.plot.plotText.plainText)
   },[])
   
   function changePlot(e, plotText) {
@@ -29,7 +29,6 @@ export default function PlotEdit(props) {
   return(
     <>
     <form onSubmit={(e) => {
-      console.log(inputValue)
       changePlot(e, inputValue)
       }}>
       <AutosizeInput 

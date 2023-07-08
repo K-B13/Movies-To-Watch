@@ -60,6 +60,7 @@ nav {
   text-align: center;
   align-items: center;
   border-radius: 30px;
+  margin: 0 0 0.5rem 0;
 }
 nav a {
   padding: 10px;
@@ -266,6 +267,7 @@ input::placeholder{
 .movie-card-heading {
   background-color: crimson;
   border-radius: 30px;
+  padding: 0 1rem;
 }
 .misc-buttons {
   background-color: crimson;

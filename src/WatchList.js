@@ -42,9 +42,12 @@ export default function WatchList(props) {
           </Link>
 
           <p>Year: {item.year}</p>
-          <p>IMDB rating: {item.rating}</p>
-          <p>Content Rating: {item.contentRating}</p>
-          <p>Genres: {item.genres}</p>
+          <p>Rating: {item.rating}</p>
+          <p>
+          {item.genres.map((genre, index) => {
+            return  <span key={index}>&nbsp; {genre.text} &nbsp;</span>
+          })}
+          </p>
         </div>
       
         &nbsp;

@@ -4,7 +4,7 @@
 This is my second project on the General Assembly’s Software Engineering Intensive program. It enables users to create, edit and update a list. API calls provide some popular movies that the user might be interested in, but there is also a search feature if the movie they want is not there.
 
 The app is deployed on github pages, the link to the page is:
-https://k-b13.github.io/Movies-To-Watch/
+[Deployment Link](https://k-b13.github.io/Movies-To-Watch/)
 
 We were given 4 days to work on the project and it was a solo project.
 

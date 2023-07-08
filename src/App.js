@@ -51,7 +51,6 @@ function App() {
   //This function changes the targeted list item's removeMovie to true then runs the function filterMovieList(see above)
   function removeSingle(num) {
     moviesToWatch[num].removeMovie = !moviesToWatch[num].removeMovie
-    console.log(moviesToWatch)
     filterMovieList()
   }
 
