@@ -98,10 +98,8 @@ header {
   display: flex;
   justify-content: center;
   margin: 0 0 0.6rem 0;
-}
-
-.arrows {
-  
+  background-color: crimson;
+  border-radius: 2rem;
 }
 
 .arrows button {
@@ -115,6 +113,7 @@ header {
 .page-number {
   display: flex;
   padding: 0 1rem;
+  font-weight: bold;
 }
 
 .movie p {
