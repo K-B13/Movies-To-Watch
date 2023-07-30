@@ -81,7 +81,7 @@ export default function WatchList(props) {
         }}
       >
 
-        {!item.revealPlot ? "Reveal": "Reset"}
+        {!item.revealPlot ? "Reveal": "Hide"}
       </button>}
 
       <br />
