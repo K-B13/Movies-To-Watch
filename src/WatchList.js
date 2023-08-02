@@ -1,10 +1,14 @@
 import StarRating from "./StarRating"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import PlotEdit from "./PlotEdit"
 import { Link } from 'react-router-dom'
 import CloseIcon from './icons8-xbox-x-32.png'
 
 export default function WatchList(props) {
+
+  // help locate the item that is being dragged 
+  const dragItem = useRef();
+  const dragOverItem = useRef();
   // used to filter through the moviesToWatch list and only show the movies that match the search criteria.
   const [filteredList, setFilteredList] = useState([])
   function filterTheList(e) {
@@ -16,6 +20,24 @@ export default function WatchList(props) {
       setFilteredList(props.moviesToWatch.filter((str) => str.starScore !== 0))
     }
   }
+
+  const dragStart = (e, position) => {
+    dragItem.current = position
+  }
+  
+  const dragEnter = (e, position) => {
+    dragOverItem.current = position
+  }
+
+  const drop = (e) => {
+    const copyFilteredList = [...filteredList];
+    const dragItemContent = copyFilteredList[dragItem.current];
+    copyFilteredList.splice(dragItem.current, 1)
+    copyFilteredList.splice(dragOverItem.current, 0, dragItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setFilteredList(copyFilteredList)
+  }
   // on load checks to see if the moviesToWatch is empty if it isn't then setFilteredList to the contents of moviesToWatch else set it to an empty string filteredList will be what is used to render the page.
   useEffect(() => {
     const moviesToSpread = props.moviesToWatch ? props.moviesToWatch: ""
@@ -25,7 +47,12 @@ export default function WatchList(props) {
   //maps over the filtered list and for each one displays information from each array item: title, image, genres, content rating and imdb rating. Also reveals some buttons on the side that can remove select and set a movie as watched.
   const renderMovieList = filteredList.map((item, index) => {
     return (
-    <div key={item.id}>
+    <div key={item.id}
+    draggable
+    onDragStart = {(e) => dragStart(e, index)}
+    onDragEnter = {(e) => dragEnter(e, index)}
+    onDragEnd = {drop}
+    >
     <div 
     className={`movie ${item.starScore ? "watched": "not-watched-yet"} ${item.selected ? "currently-selected": "not-selected"}`} 
     >
