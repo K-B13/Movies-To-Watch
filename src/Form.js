@@ -2,7 +2,7 @@
 export default function Form(props) {
   return(
     <form onSubmit={(e) =>
-      props.submitSearchValue(e)
+      props.submitSearchValue(e, props.searchValue2)
     }>
       <input 
       placeholder="Search"

@@ -102,6 +102,10 @@ header {
   border-radius: 2rem;
 }
 
+.hiddenArrow {
+  min-width: 60px;
+}
+
 .arrows button {
   border: none;
 }
