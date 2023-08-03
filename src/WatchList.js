@@ -30,13 +30,13 @@ export default function WatchList(props) {
   }
 
   const drop = (e) => {
-    const copyFilteredList = [...filteredList];
-    const dragItemContent = copyFilteredList[dragItem.current];
-    copyFilteredList.splice(dragItem.current, 1)
-    copyFilteredList.splice(dragOverItem.current, 0, dragItemContent);
+    const copyMovieList = [...props.moviesToWatch];
+    const dragItemContent = copyMovieList[dragItem.current];
+    copyMovieList.splice(dragItem.current, 1)
+    copyMovieList.splice(dragOverItem.current, 0, dragItemContent);
     dragItem.current = null;
     dragOverItem.current = null;
-    setFilteredList(copyFilteredList)
+    props.setMoviesToWatch(copyMovieList)
   }
   // on load checks to see if the moviesToWatch is empty if it isn't then setFilteredList to the contents of moviesToWatch else set it to an empty string filteredList will be what is used to render the page.
   useEffect(() => {
@@ -48,7 +48,6 @@ export default function WatchList(props) {
   const renderMovieList = filteredList.map((item, index) => {
     return (
     <div key={item.id}
-    draggable
     onDragStart = {(e) => dragStart(e, index)}
     onDragEnter = {(e) => dragEnter(e, index)}
     onDragEnd = {drop}
@@ -101,7 +100,7 @@ export default function WatchList(props) {
       {/*if the movie's hasWatched is true then the starRating component is show and passed some information about the movie. */}
       {item.hasWatched && <StarRating item={item} reRender={props.triggerReRender} />} 
       {/*if the movie has a star score then the button to view the plot to edit it will be revealed. */}
-      {item.starScore !== 0 && <button 
+      {item.starScore !== 0 && item.hasWatched && <button 
       onClick={() => {
         item.revealPlot = !item.revealPlot
         props.triggerReRender()

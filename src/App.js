@@ -102,6 +102,7 @@ function App() {
         </Route>
         <Route path="/WatchList" element={<WatchList 
         moviesToWatch={moviesToWatch} 
+        setMoviesToWatch={setMoviesToWatch}
         removeSingle={removeSingle} 
         selectButton={selectButton} 
         removeSelected={removeSelected} 
